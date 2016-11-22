@@ -31,6 +31,7 @@ var Merlin =
             randomPlayerIndex = Math.floor(Math.random() * goodPlayers.length);
             pickedPlayer = goodPlayers[randomPlayerIndex];
         } while (!mission.hasPlayer(pickedPlayer));
+
         return pickedPlayer;
     }
 };

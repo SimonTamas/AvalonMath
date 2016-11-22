@@ -11,7 +11,7 @@ var Player = function(_role)
 
     player.isGoodInTheEyesOfMerlin = function()
     {
-        return player.role != "Morgana" || player.role != "Assassin" || player.role != "Bad Lancelot";
+        return player.role !== Morgana && player.role !== Assassin;
     };
 
     player.getMissionVote = function(mission)
