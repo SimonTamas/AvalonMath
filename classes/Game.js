@@ -3,13 +3,10 @@ var Game = function()
     var game = this;
 
     game.currentPicker = 0;
-    game.pickingIndex = 1;
+    game.pickNumber = 1;
     game.players = [];
     game.pickedMissions = [];
     game.missions = [];
-    game.totalNrOfMissions = 5;
-    game.pickingIndexNoVote = 5;
-    game.neededMissions = 3;
     game.result = null;
 
     game.missionData = {
@@ -94,7 +91,7 @@ var Game = function()
 
         var missionNumber = game.getCurrentMissionNumber();
         var missionSpots = game.getCurrentMissionSpots();
-        var mission = new Mission(missionNumber);
+        var mission = new Mission(missionNumber, game.pickNumber);
 
         // A player will always put himself on a mission
         mission.addPlayer(playerPicking);
@@ -109,14 +106,14 @@ var Game = function()
 
         game.pickedMissions.push(mission);
 
-        if ( game.pickingIndex == game.pickingIndexNoVote )
+        if ( mission.isFifthPick() )
         {
             // This mission goes regardless of voting
             mission.doMission();
 
             game.missions.push(mission);
 
-            game.pickingIndex = 0;
+            game.pickNumber = 1;
         }
         else
         {
@@ -129,12 +126,12 @@ var Game = function()
             else
             {
                 // Pick goes to the next player
-                game.pickingIndex++;
+                game.pickNumber++;
             }
         }
-        if ( game.getNumberOfSuccessfulMissions() < game.neededMissions ) {
-            if ( game.getNumberOfFailedMissions() < game.neededMissions ) {
-                if (game.getCurrentMissionNumber() < game.totalNrOfMissions) {
+        if ( game.getNumberOfSuccessfulMissions() < 3 ) {
+            if ( game.getNumberOfFailedMissions() <3 ) {
+                if (game.getCurrentMissionNumber() < 5) {
                     game.currentPicker++;
                     game.pickMission();
                 }

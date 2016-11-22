@@ -1,5 +1,5 @@
 var game;
-var numberOfSimulation = 100000;
+var numberOfSimulation = 10000;
 var results = [];
 
 for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulationNumber++ )

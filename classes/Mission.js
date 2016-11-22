@@ -1,10 +1,17 @@
-var Mission = function(_missionNumber)
+var Mission = function(_missionNumber, _pickNumber)
 {
     var mission = this;
 
     mission.missionNumber = _missionNumber;
     mission.participants = [];
     mission.results = [];
+    mission.pickNumber = _pickNumber;
+
+
+    mission.isFifthPick = function()
+    {
+        return mission.pickNumber == 5;
+    };
 
     mission.addPlayer = function(_player, _isPicker)
     {

@@ -9,14 +9,18 @@ var Player = function(_role)
         return player.role.isGood;
     };
 
+    player.isGoodInTheEyesOfMerlin = function()
+    {
+        return player.role != "Morgana" || player.role != "Assassin" || player.role != "Bad Lancelot";
+    };
+
     player.getMissionVote = function(mission)
     {
         return player.role.isGood; // Dumbed down version for now
     };
 
-    player.pickPlayerForMission = function(players,mission)
+    player.pickRandomPlayerForMission = function(players, mission)
     {
-        // If this function is not implemented picks will always be random
         var randomPlayerIndex, pickedPlayer;
         do
         {
@@ -24,7 +28,16 @@ var Player = function(_role)
             pickedPlayer = players[randomPlayerIndex];
         } while ( !mission.hasPlayer(pickedPlayer) );
         return pickedPlayer;
+    };
 
+    player.pickPlayerForMission = function(players,mission)
+    {
+        // If this function is not implemented picks will always be random
+        if ( player.role.pickPlayerForMission )
+        {
+            return player.role.pickPlayerForMission(players,mission);
+        }
+        return player.pickRandomPlayerForMission(players,mission);
     };
 
     return player;
