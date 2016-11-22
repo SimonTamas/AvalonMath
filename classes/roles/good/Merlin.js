@@ -4,11 +4,13 @@ var Merlin =
     name : "Merlin",
     pickPlayerForMission : function(players, mission)
     {
-        // Merlin will not Mordred and Morgana
+        var goodPlayers ;
+
+        // Merlin will not pick a bad guy
         // on a mission that definitely goes
         if ( mission.isFifthPick() ) {
 
-            var goodPlayers = [];
+            goodPlayers = [];
             var player, playerIndex;
             for (playerIndex = 0; playerIndex < players.length; playerIndex++) {
                 player = players[playerIndex];
@@ -16,14 +18,19 @@ var Merlin =
                     goodPlayers.push(player);
                 }
             }
-
-            var randomPlayerIndex, pickedPlayer;
-            do
-            {
-                randomPlayerIndex = Math.floor(Math.random() * goodPlayers.length);
-                pickedPlayer = goodPlayers[randomPlayerIndex];
-            } while (!mission.hasPlayer(pickedPlayer));
-            return pickedPlayer;
         }
+        else
+        {
+            //TODO: Add some tactic for Merlin
+            goodPlayers = players;
+        }
+
+        var randomPlayerIndex, pickedPlayer;
+        do
+        {
+            randomPlayerIndex = Math.floor(Math.random() * goodPlayers.length);
+            pickedPlayer = goodPlayers[randomPlayerIndex];
+        } while (!mission.hasPlayer(pickedPlayer));
+        return pickedPlayer;
     }
 };
