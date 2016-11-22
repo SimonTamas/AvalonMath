@@ -1,5 +1,10 @@
 var Mordred =
 {
     isGood : false,
-    name : "Mordred"
+    name : "Mordred",
+    getMissionVote : function(mission)
+    {
+        return mission.isFirstMission();
+    }
+
 };

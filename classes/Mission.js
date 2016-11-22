@@ -13,6 +13,11 @@ var Mission = function(_missionNumber, _pickNumber)
         return mission.pickNumber == 5;
     };
 
+    mission.isFirstMission = function()
+    {
+        return mission.missionNumber == 1;
+    };
+
     mission.addPlayer = function(_player, _isPicker)
     {
         var participant = new Participant(_player, _isPicker);
@@ -95,7 +100,7 @@ var Mission = function(_missionNumber, _pickNumber)
         for ( var participantIndex = 0 ; participantIndex < mission.participants.length ; participantIndex++ )
         {
             participant = mission.participants[participantIndex];
-            participantVote = participant.getMissionVote();
+            participantVote = participant.getMissionVote(mission);
             mission.results.push(participantVote);
         }
     };

@@ -16,6 +16,11 @@ var Player = function(_role)
 
     player.getMissionVote = function(mission)
     {
+        // If this function is not implemented picks will always be based on goodness
+        if ( player.role.getMissionVote )
+        {
+            return player.role.getMissionVote(mission);
+        }
         return player.role.isGood; // Dumbed down version for now
     };
 
