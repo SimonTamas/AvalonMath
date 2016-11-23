@@ -1,5 +1,5 @@
 var game;
-var numberOfSimulation = 10000;
+var numberOfSimulation = 1000;
 var numberSucceeded = 0;
 
 for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulationNumber++ )

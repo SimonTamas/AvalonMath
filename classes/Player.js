@@ -14,6 +14,11 @@ var Player = function(_role)
         return player.role !== Morgana && player.role !== Assassin;
     };
 
+    player.isSeenByPercival = function()
+    {
+        return player.role == Morgana || player.role == Merlin;
+    };
+
     player.getMissionVote = function(mission)
     {
         // If this function is not implemented picks will always be based on goodness
