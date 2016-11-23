@@ -2,9 +2,16 @@ var Mordred =
 {
     isGood : false,
     name : "Mordred",
-    getMissionVote : function(mission)
+    getMissionVote : function(_player,_mission)
     {
-        return mission.isFirstMission();
+        // If Mordred sees there is another
+        // bad guy on the mission he wont fail
+        if ( _mission.hasAnotherBadGuyBesides(_player) )
+        {
+            // Unless this mission this needs two fails
+            return !_mission.needsTwoFails();
+        }
+        return _mission.isFirstMission();
     }
 
 };

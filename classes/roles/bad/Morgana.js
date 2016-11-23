@@ -2,9 +2,9 @@ var Morgana =
 {
     isGood : false,
     name : "Morgana",
-    getMissionVote : function(mission)
+    getMissionVote : function(_player, _mission)
     {
-        if ( mission.isFirstMission() ) {
+        if ( _mission.isFirstMission() ) {
             return 50 < Math.random() * 100;
         }
         return false;

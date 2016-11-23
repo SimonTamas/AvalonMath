@@ -5,6 +5,16 @@ var Participant = function(_player, _isPicker)
     participant.player = _player;
     participant.isPicker = _isPicker;
 
+    participant.isBad = function()
+    {
+        return !participant.player.role.isGood;
+    };
+
+    participant.getRole = function()
+    {
+        return participant.player.role;
+    };
+
     participant.hasPickedTheMission = function()
     {
         return participant.isPicker;

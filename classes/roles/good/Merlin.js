@@ -2,7 +2,7 @@ var Merlin =
 {
     isGood : true,
     name : "Merlin",
-    pickPlayerForMission : function(_merlin, _players, _mission)
+    pickPlayerForMission : function(_player, _players, _mission)
     {
         var goodPlayers = _players;
 
@@ -20,6 +20,6 @@ var Merlin =
             }
         }
 
-        return _merlin.pickRandomPlayerForMission(goodPlayers);
+        return _player.pickRandomPlayerForMission(goodPlayers);
     }
 };

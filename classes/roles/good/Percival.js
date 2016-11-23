@@ -2,7 +2,7 @@ var Percival =
 {
     isGood: true,
     name: "Percival",
-    pickPlayerForMission : function(_percival, _players, _mission)
+    pickPlayerForMission : function(_player, _players, _mission)
     {
         var percivalPicks = _players;
 
@@ -29,6 +29,6 @@ var Percival =
             //TODO: Figure out which is which
         }
 
-        return _percival.pickRandomPlayerForMission(percivalPicks);
+        return _player.pickRandomPlayerForMission(percivalPicks);
     }
 };

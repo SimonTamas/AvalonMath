@@ -23,4 +23,4 @@ for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulat
 
 var succeededPercentage = (numberSucceeded/numberOfSimulation)*100;
 
-console.log(succeededPercentage+"%");
+document.getElementById("percent").innerHTML = succeededPercentage+"%";

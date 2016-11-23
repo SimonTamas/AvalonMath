@@ -14,6 +14,25 @@ var Mission = function(_missionNumber, _pickNumber, _requiredFails)
         return mission.pickNumber == 5;
     };
 
+    mission.needsTwoFails = function()
+    {
+        return mission.requiredFails == 2;
+    };
+
+    mission.hasAnotherBadGuyBesides = function(_player)
+    {
+        var participant;
+        for ( var participantIndex = 0 ; participantIndex < mission.participants.length ; participantIndex++ )
+        {
+            participant = mission.participants[participantIndex];
+            if ( participant.isBad() && participant.player !== _player)
+            {
+                return true;
+            }
+        }
+        return false;
+    };
+
     mission.isFirstMission = function()
     {
         return mission.missionNumber == 1;
