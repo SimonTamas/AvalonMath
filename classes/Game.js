@@ -117,6 +117,30 @@ var Game = function()
         return playersNotOnMission;
     };
 
+    game.getMostObviousOtherBadGuyOrRandom = function(_badPlayer)
+    {
+        var player;
+        var mostPlayedFailsPlayerIndex = null;
+        for ( var playerIndex = 0 ; playerIndex < game.players.length ; playerIndex++ )
+        {
+            player = game.players[playerIndex];
+            if ( player !== _badPlayer && player.isBad() )
+            {
+                if ( mostPlayedFailsPlayerIndex !== null )
+                {
+                    if ( game.players[playerIndex].playedClearFails > game.players[mostPlayedFailsPlayerIndex].playedClearFails )
+                    {
+                        mostPlayedFailsPlayerIndex = playerIndex;
+                    }
+                }
+                else {
+                    mostPlayedFailsPlayerIndex = playerIndex;
+                }
+            }
+        }
+        return game.players[mostPlayedFailsPlayerIndex];
+    };
+
     game.pickMission = function()
     {
         var playerPicking = game.getPlayerPicking();
@@ -134,7 +158,7 @@ var Game = function()
         for ( var pickIndex = 1 ; pickIndex < missionSpots ; pickIndex++ )
         {
             playersNotAlreadyOnTheMission = game.getPlayersNotOnMission(mission);
-            pickedPlayer = playerPicking.pickPlayerForMission(playersNotAlreadyOnTheMission,mission);
+            pickedPlayer = playerPicking.pickPlayerForMission(game,playersNotAlreadyOnTheMission,mission);
             mission.addPlayer(pickedPlayer, false);
         }
 

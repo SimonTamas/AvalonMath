@@ -19,6 +19,7 @@ var Mission = function(_missionNumber, _pickNumber, _requiredFails)
         return mission.requiredFails == 2;
     };
 
+
     mission.hasAnotherBadGuyBesides = function(_player)
     {
         var participant;

@@ -2,7 +2,7 @@ var Merlin =
 {
     isGood : true,
     name : "Merlin",
-    pickPlayerForMission : function(_player, _players, _mission)
+    pickPlayerForMission : function(_game, _player, _players, _mission)
     {
         var goodPlayers = _players;
 
