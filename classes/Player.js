@@ -24,25 +24,20 @@ var Player = function(_role)
         return player.role.isGood; // Dumbed down version for now
     };
 
-    player.pickRandomPlayerForMission = function(players, mission)
+    player.pickRandomPlayerForMission = function(_players)
     {
-        var randomPlayerIndex, pickedPlayer;
-        do
-        {
-            randomPlayerIndex = Math.floor(Math.random()*players.length);
-            pickedPlayer = players[randomPlayerIndex];
-        } while ( !mission.hasPlayer(pickedPlayer) );
-        return pickedPlayer;
+        var randomPlayerIndex = Math.floor(Math.random()*_players.length);
+        return _players[randomPlayerIndex];
     };
 
-    player.pickPlayerForMission = function(players,mission)
+    player.pickPlayerForMission = function(_players,_mission)
     {
         // If this function is not implemented picks will always be random
         if ( player.role.pickPlayerForMission )
         {
-            return player.role.pickPlayerForMission(players,mission);
+            return player.role.pickPlayerForMission(player,_players,_mission);
         }
-        return player.pickRandomPlayerForMission(players,mission);
+        return player.pickRandomPlayerForMission(_players);
     };
 
     return player;

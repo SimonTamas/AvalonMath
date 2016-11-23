@@ -1,4 +1,4 @@
-var Mission = function(_missionNumber, _pickNumber)
+var Mission = function(_missionNumber, _pickNumber, _requiredFails)
 {
     var mission = this;
 
@@ -6,6 +6,7 @@ var Mission = function(_missionNumber, _pickNumber)
     mission.participants = [];
     mission.results = [];
     mission.pickNumber = _pickNumber;
+    mission.requiredFails = _requiredFails;
 
 
     mission.isFifthPick = function()
@@ -107,7 +108,17 @@ var Mission = function(_missionNumber, _pickNumber)
 
     mission.hasFailed = function()
     {
-        return mission.results.indexOf(false) >= 0;
+        var failCount = 0;
+        var result;
+        for ( var resultIndex = 0 ; resultIndex < mission.results.length ; resultIndex++ )
+        {
+            result = mission.results[resultIndex];
+            if ( !result )
+            {
+                failCount++;
+            }
+        }
+        return failCount >= mission.requiredFails;
     };
 
     mission.hasPassed = function()

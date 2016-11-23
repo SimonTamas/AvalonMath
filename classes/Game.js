@@ -10,12 +10,22 @@ var Game = function()
     game.result = null;
 
     game.missionData = {
-        "5" : [2,3,2,3,3],
-        "6" : [2,3,4,3,4],
-        "7" : [2,3,3,4,4],
-        "8" : [3,4,4,5,5],
-        "9" : [3,4,4,5,5],
-        "10" : [3,4,4,5,5]
+        spots : {
+            "5": [2, 3, 2, 3, 3],
+            "6": [2, 3, 4, 3, 4],
+            "7": [2, 3, 3, 4, 4],
+            "8": [3, 4, 4, 5, 5],
+            "9": [3, 4, 4, 5, 5],
+            "10": [3, 4, 4, 5, 5]
+        },
+        requiredFails : {
+            "5": [1, 1, 1, 1, 1],
+            "6": [1, 1, 1, 1, 1],
+            "7": [1, 1, 1, 2, 1],
+            "8": [1, 1, 1, 2, 1],
+            "9": [1, 1, 1, 2, 1],
+            "10": [1, 1, 1, 2, 1]
+        }
     };
 
     game.shufflePlayers = function()
@@ -52,7 +62,14 @@ var Game = function()
     {
         var missionNumber = game.getCurrentMissionNumber();
         var nrOfPlayers = game.getNumberOfPlayers();
-        return game.missionData[nrOfPlayers][missionNumber];
+        return game.missionData.spots[nrOfPlayers][missionNumber];
+    };
+
+    game.getCurrentMissionRequiredFails = function()
+    {
+        var missionNumber = game.getCurrentMissionNumber();
+        var nrOfPlayers = game.getNumberOfPlayers();
+        return game.missionData.requiredFails[nrOfPlayers][missionNumber];
     };
 
     game.getNumberOfSuccessfulMissions = function()
@@ -85,22 +102,39 @@ var Game = function()
         return failedMissions;
     };
 
+    game.getPlayersNotOnMission = function(mission)
+    {
+        var playersNotOnMission = [];
+        var player;
+        for ( var playerIndex = 0 ; playerIndex < game.players.length ; playerIndex++ )
+        {
+            player = game.players[playerIndex];
+            if ( !mission.hasPlayer(player))
+            {
+                playersNotOnMission.push(player);
+            }
+        }
+        return playersNotOnMission;
+    };
+
     game.pickMission = function()
     {
         var playerPicking = game.getPlayerPicking();
 
         var missionNumber = game.getCurrentMissionNumber();
         var missionSpots = game.getCurrentMissionSpots();
-        var mission = new Mission(missionNumber, game.pickNumber);
+        var missionRequiredFails = game.getCurrentMissionRequiredFails();
+        var mission = new Mission(missionNumber, game.pickNumber, missionRequiredFails);
 
         // A player will always put himself on a mission
-        mission.addPlayer(playerPicking);
+        mission.addPlayer(playerPicking, true);
 
         // Now the player picks the number of people needed
-        var pickedPlayer;
+        var pickedPlayer, playersNotAlreadyOnTheMission;
         for ( var pickIndex = 1 ; pickIndex < missionSpots ; pickIndex++ )
         {
-            pickedPlayer = playerPicking.pickPlayerForMission(game.players,mission);
+            playersNotAlreadyOnTheMission = game.getPlayersNotOnMission(mission);
+            pickedPlayer = playerPicking.pickPlayerForMission(playersNotAlreadyOnTheMission,mission);
             mission.addPlayer(pickedPlayer, false);
         }
 
@@ -153,7 +187,7 @@ var Game = function()
      */
     game.start = function()
     {
-        // 1. Shuffle roles
+        // 1. Shuffle players
         game.shufflePlayers();
 
         game.pickMission();

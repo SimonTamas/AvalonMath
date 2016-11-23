@@ -1,6 +1,6 @@
 var game;
 var numberOfSimulation = 10000;
-var results = [];
+var numberSucceeded = 0;
 
 for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulationNumber++ )
 {
@@ -11,27 +11,16 @@ for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulat
     game.addPlayer(new Player(LoyalServant));
     game.addPlayer(new Player(LoyalServant));
 
-    game.addPlayer(new Player(Mordred));
     game.addPlayer(new Player(Morgana));
     game.addPlayer(new Player(Assassin));
+    game.addPlayer(new Player(Mordred));
 
     game.start();
 
-    results.push(game.result);
+
+    numberSucceeded += game.result ? 1 : 0;
 }
 
-var succeeded = 0;
-for ( var resultIndex = 0 ; resultIndex < results.length ; resultIndex++ )
-{
-    if ( results[resultIndex])
-    {
-        succeeded++;
-    }
-}
-
-// 100% ...... numberOfSimulations
-// x ............. succeeded
-
-var succeededPercentage = (100*succeeded)/numberOfSimulation;
+var succeededPercentage = (numberSucceeded/numberOfSimulation)*100;
 
 console.log(succeededPercentage+"%");
