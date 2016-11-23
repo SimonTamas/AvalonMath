@@ -14,7 +14,11 @@ var Percival =
             var player, playerIndex, alreadyPickedOneSeen;
             for (playerIndex = 0; playerIndex < _players.length; playerIndex++) {
                 player = _players[playerIndex];
-                if ( !player.isSeenByPercival() || !alreadyPickedOneSeen ) {
+                if ( !player.isSeenByPercival() ) {
+                    percivalPicks.push(player);
+                }
+                else if ( !alreadyPickedOneSeen )
+                {
                     percivalPicks.push(player);
                     alreadyPickedOneSeen = true;
                 }
