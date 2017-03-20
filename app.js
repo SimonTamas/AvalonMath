@@ -13,7 +13,8 @@ for ( var simulationNumber = 0 ; simulationNumber < numberOfSimulation ; simulat
 
     game.addPlayer(new Player(Morgana));
     game.addPlayer(new Player(Assassin));
-    game.addPlayer(new Player(Mordred));
+    //game.addPlayer(new Player(Mordred));
+    game.addPlayer(new Player(Puck));
 
     game.start();
 

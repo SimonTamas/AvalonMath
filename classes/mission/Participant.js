@@ -20,9 +20,9 @@ var Participant = function(_player, _isPicker)
         return participant.isPicker;
     };
 
-    participant.getMissionVote = function(mission)
+    participant.getMissionVote = function(_game,_mission)
     {
-        return participant.player.getMissionVote(mission);
+        return participant.player.getMissionVote(_game,_mission);
     };
 
     return participant;

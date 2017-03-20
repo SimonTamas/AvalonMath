@@ -25,12 +25,18 @@ var Player = function(_role)
         return player.role == Morgana || player.role == Merlin;
     };
 
+    player.isRole = function(_role)
+    {
+        return _role == player.role;
+    };
+
     /**
      * Returns whether the player voted success
+     * @param {Game} game
      * @param {Mission} mission
      * @returns {Boolean}
      */
-    player.getMissionVote = function(mission)
+    player.getMissionVote = function(game,mission)
     {
         // 1. Vote is based on role
         var successVote = player.role.isGood;
@@ -40,7 +46,7 @@ var Player = function(_role)
         // based on the current mission
         if ( player.role.getMissionVote )
         {
-            successVote = player.role.getMissionVote(player,mission);
+            successVote = player.role.getMissionVote(game,player,mission);
         }
 
         // 2. If it is very clear to the bad guys that his person

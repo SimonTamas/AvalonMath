@@ -2,7 +2,7 @@ var Mordred =
 {
     isGood : false,
     name : "Mordred",
-    getMissionVote : function(_player,_mission) {
+    getMissionVote : function(_game,_player,_mission) {
         // If Mordred sees there is another
         // bad guy on the mission he wont fail
         if (_mission.hasAnotherBadGuyBesides(_player)) {

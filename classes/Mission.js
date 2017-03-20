@@ -115,13 +115,13 @@ var Mission = function(_missionNumber, _pickNumber, _requiredFails)
     };
 
 
-    mission.doMission = function()
+    mission.doMission = function(_game)
     {
         var participant, participantVote;
         for ( var participantIndex = 0 ; participantIndex < mission.participants.length ; participantIndex++ )
         {
             participant = mission.participants[participantIndex];
-            participantVote = participant.getMissionVote(mission);
+            participantVote = participant.getMissionVote(_game,mission);
             mission.results.push(participantVote);
         }
     };

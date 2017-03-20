@@ -141,6 +141,15 @@ var Game = function()
         return game.players[mostPlayedFailsPlayerIndex];
     };
 
+    game.didMissionNumberFail = function(number)
+    {
+        if ( number <= game.missions.length )
+        {
+            return game.missions[number].hasFailed();
+        }
+        return false;
+    };
+
     game.pickMission = function()
     {
         var playerPicking = game.getPlayerPicking();
@@ -167,7 +176,7 @@ var Game = function()
         if ( mission.isFifthPick() )
         {
             // This mission goes regardless of voting
-            mission.doMission();
+            mission.doMission(game);
 
             game.missions.push(mission);
 
