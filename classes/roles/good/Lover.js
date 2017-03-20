@@ -8,7 +8,7 @@ var Lover =
 
         // A lover will always with the other lover
         if ( _mission.isFifthPick() ) {
-            var player, playerIndex, alreadyPickedOneSeen;
+            var player, playerIndex;
             for (playerIndex = 0; playerIndex < _players.length; playerIndex++) {
                 player = _players[playerIndex];
                 if ( player.isRole(Lover)) {
